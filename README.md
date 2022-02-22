@@ -1,70 +1,32 @@
-# Getting Started with Create React App
+# React calculator App Rework
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+I cam across this youtube tutorial on react and decided that it could be done with a few extra enhancements. You can find the tutorial at [Build a CALCULATOR APP in REACT JS | A React JS Beginner Tutorial](https://www.youtube.com/watch?v=oiX-6Y2oGjI).
+Please kindly show only love to the creator of the video for creating a usefull tutorial.
 
-## Available Scripts
+## Final Output
 
-In the project directory, you can run:
+![Calculator App Screenshot](react-calculator-app-github.png)
 
-### `npm start`
+## Enhancements
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Replacing javascript eval() with mathjs.evaluate()
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+One of the main code decisions that I believe could be enhanced is the creators usage of the `eval` functionality. While there are different school of thoughts on the usage of eval in javascript when parsing string that has interaction with end users, it is more often than not acknowledged that using eval does pose certain risks.
 
-### `npm test`
+To further cement the decision of replacing the eval functionality, when I tried to replace `eval` with a `Function` statement (which inherently does the same thing) Netflify produced this error message duing build and cancelled the build.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![Netlify error message due to eval](eval-error-message-netlify.png)
 
-### `npm run build`
+To workaround this instead of using eval, I decided to use the [mathjs](https://mathjs.org/) library. mathjs contains an `evaluate` function which gives us the result that we need with minor changes to the original creators code.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+**Note: the evaluate function in mathjs executes the expressions in a sandboxed environment to reduce the potential risk of missuse, `however` there may be unknown security vulnerabilities, hence it is advised to be extra carefull when implementing the use of this function especially in server side scripts **
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Adding checks to reduce out-of-bounds error
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+When using the DEL button in the app, the original creator used a method to slice() the last character of the string and returning the new sliced string as the updated string. This works well except when there is only one character left in the string which then throws an error in the console.
 
-### `npm run eject`
+To overcome this I have added a check to ensure that if it is the last character and the DEL button is pressed the string will not splice but instead become empty string.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Adding a C button
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+While the delete button works if you need to edit the character inputted, a clear button is extremely usefull and I would believe an important part of a calculator. It just makes life easier!
