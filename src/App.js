@@ -1,15 +1,11 @@
 import { useState } from "react";
+import { evaluate } from "mathjs";
 
 function App() {
   const [calc, setCalc] = useState("");
   const [result, setResult] = useState("");
 
   const operatorButtons = ["/", "*", "-", "+", "."];
-
-  function parse(str) {
-    let x = Function(`'use strict'; return (${str})`)();
-    return x.toString();
-  }
 
   function updateCalc(value) {
     if (operatorButtons.includes(value)) {
@@ -24,7 +20,7 @@ function App() {
     setCalc(currentCalc);
 
     if (!operatorButtons.includes(currentCalc.slice(-1))) {
-      setResult(parse(currentCalc));
+      setResult(evaluate(currentCalc).toString());
     }
   }
 
@@ -44,7 +40,7 @@ function App() {
     if (operatorButtons.includes(calc.slice(-1))) {
       return;
     }
-    setCalc(parse(calc));
+    setCalc(evaluate(calc).toString());
   };
 
   const deleteLast = () => {
@@ -61,9 +57,9 @@ function App() {
     setCalc(value);
 
     if (operatorButtons.includes(value.slice(-1))) {
-      setResult(parse(value.slice(0, -1)));
+      setResult(evaluate(value.slice(0, -1)).toString());
     } else {
-      setResult(parse(value));
+      setResult(evaluate(value).toString());
     }
   };
 
