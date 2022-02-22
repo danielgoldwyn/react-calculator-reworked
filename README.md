@@ -1,11 +1,15 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/f6557514-cb1e-4262-8bf5-ff3eabdad64b/deploy-status)](https://app.netlify.com/sites/vigorous-chandrasekhar-cf3737/deploys)
+
 # React calculator App Rework
 
-I cam across this youtube tutorial on react and decided that it could be done with a few extra enhancements. You can find the tutorial at [Build a CALCULATOR APP in REACT JS | A React JS Beginner Tutorial](https://www.youtube.com/watch?v=oiX-6Y2oGjI).
+I came across this react youtube tutorial and decided that it could be done with a few extra enhancements. You can find the tutorial at [Build a CALCULATOR APP in REACT JS | A React JS Beginner Tutorial](https://www.youtube.com/watch?v=oiX-6Y2oGjI).
 Please kindly show only love to the creator of the video for creating a usefull tutorial.
 
 ## Final Output
 
 ![Calculator App Screenshot](react-calculator-app-github.png)
+
+You can find the live version of this app [here](https://vigorous-chandrasekhar-cf3737.netlify.app/)!
 
 ## Enhancements
 
